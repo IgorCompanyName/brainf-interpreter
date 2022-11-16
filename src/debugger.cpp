@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
         d.start(argv[1]);
         std::cout << "Opened file '" << argv[1] << "'\n\n";
     }
-    
+    // TODO: Add more commands for debuggind brainfuck
     while(true) {
         if(d.i.s_Path != "")
             std::cout << " (" << d.i.s_Path << ") >>> ";

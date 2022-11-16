@@ -15,8 +15,8 @@ For Linux use compilation from source.
 
 ### Compile from source / Linux
 
-For this project you will need to have gcc/clang or any other compiler and
-cmake installed on your computer.
+To compile this you will need to have gcc/clang or any other C++ compiler and
+CMake already installed on your computer.
 
 To configure cmake and compile Debug build use:
 
@@ -36,7 +36,7 @@ Now you can use brainf*ck interpreter and debugger!
 
 ## Usage
 
-Use executable you compiled or downloaded and write:
+To use executable you compiled or downloaded and write:
 
 ```bash
 # Interpreter
