@@ -39,18 +39,37 @@ int main(int argc, char* argv[]) {
                 printf("Open file to debug: 'open <filename>'\n");
                 continue;
             }
-            printf("Stepped to char '%c' at %d\n", 
-            d.i.instruction[d.i.instructionPointer], d.i.instructionPointer);
-            d.step();
-        } else if(cmd == "sc") {
+            if(args.size() < 2) {
+                d.step();
+                printf("Stepped to char '%c' at %d\n", 
+                d.i.instruction[d.i.instructionPointer], 
+                d.i.instructionPointer); 
+            } else {
+                std::string arg = args[1]; // get argument
+                int num;
+                try {
+                    num = stoi(arg);
+                } catch(...) {
+                    std::cerr << "'" << arg << "' is not a whole number!\n";
+                    continue;
+                }
+                for(int i = 0; i < num; i++) {
+                    if(!d.task) break;
+                    d.step();
+                }
+                printf("Stepped to char '%c' at %d\n",
+                d.i.instruction[d.i.instructionPointer], 
+                d.i.instructionPointer); 
+            }
+        } else if(cmd == "ls") {
             if(!d.task) {
                 printf("Open file to debug: 'open <filename>'\n");
                 continue;
             }
             d.showCode();
-        } else if(cmd == "help") {
+        } else if(cmd == "help" || cmd == "?") {
             printf("\nCommands list:\n" 
-            "    exit help step memory sc interpret open\n\n");
+            "    exit help step memory ls interpret open clear\n\n");
         } else if(cmd == "open" || cmd == "o") {
             if(args.size() >= 2) {
                 d.start(args[1].c_str());
@@ -76,6 +95,14 @@ int main(int argc, char* argv[]) {
                 d.end();
             else
                 printf("Open file to debug: 'open <filename>'\n");
+        } else if(cmd == "clear" || cmd == "cl") {
+            #ifdef linux
+                system("clear");
+            #elif _WIN32
+                system("cls");
+            #else
+            #error What the hell of a system are you using?
+            #endif
         } else {
             std::cout << "Incorrect command '" << cmd << "'. Enter 'help' to get a list of"
             " commands\n";

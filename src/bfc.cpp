@@ -1,4 +1,6 @@
 #include "bfc.hpp"
+#include <fstream>
+#include <iostream>
 
 void increment(int *ptr, int max) {
     if (*ptr == max) {
@@ -30,25 +32,38 @@ Interpreter::Interpreter() {
     dataPointer = 0;
     instructionPointer = 0;
     bracketCounter = 0;
+    cyclesElapsed = 0;
 }
 
 Interpreter::Interpreter(const char* path) {
-    f = fopen(path, "r");
-
+    using namespace std;
+    ifstream file;
+    file.open(path);
+    if(!file.is_open()) {
+        std::cerr << "Error opening file!" << std::endl;
+        hasCode = false;
+        return;
+    }
     for(i = 0; i < MAX_SIZE; i++) {
         data[i] = 0;
-        instruction[i] = '\0';
+        instruction[i] = 0;
     }
     instructionPointer = 0;
-    while((c = fgetc(f)) != EOF) {
-        instruction[instructionPointer] = c;
+    char ch;
+
+    string opcheck = "+-<>[].,";
+    while(file >> noskipws >> ch) {
+        if(opcheck.find(ch) == string::npos)
+            continue;
+        instruction[instructionPointer] = ch;
         instructionPointer++;
     }
-    fclose(f);
+    file.close();
 
     dataPointer = 0;
     instructionPointer = 0;
     bracketCounter = 0;
+    cyclesElapsed = 0;
 
     s_Path = path;
     hasCode = true;
@@ -125,6 +140,7 @@ void Interpreter::step(char c) {
             break;
     }
     instructionPointer++;
+    cyclesElapsed++;
 }
 void Interpreter::interpret() {
     while((c = instruction[instructionPointer]) != '\0') {

@@ -24,6 +24,7 @@ public:
     int dataPointer;
     int data[MAX_SIZE];
     int instructionPointer;
+    unsigned long cyclesElapsed = 0;
     char instruction[MAX_SIZE];
     bool hasCode;
     std::string s_Path;
