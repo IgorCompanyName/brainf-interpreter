@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
         std::string temp;
 
         getline(std::cin, temp);
-        if(temp.empty())
+        if(temp.find_first_not_of(' ') == std::string::npos)
             continue;
     
         std::stringstream ss(temp);
