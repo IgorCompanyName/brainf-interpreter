@@ -2,43 +2,51 @@
 
 ## Overview
 
-This project is done in c++. It's a small debugger as well as an interpreter 
+This project is done in C++. It's a small debugger as well as an interpreter
 for [Brainf*ck esoteric language](https://en.wikipedia.org/wiki/Brainfuck
 "Brainf*ck wikipedia").
 
-## How to use
-
-### Windows
+## Compilation
 
 For windows, just download release files and use them within the command line
 or PowerShell.
 
-### Linux
+For Linux use compilation from source.
 
-Before compilation, you need to download C/C++. If you have it already, then
-skip this step, but for anyone who doesn't have g++, here:
+### Compile from source / Linux
 
-```bash
-# Ubuntu / Debian
-sudo apt install g++ -y
+For this project you will need to have gcc/clang or any other compiler and
+cmake installed on your computer.
 
-# Fedora
-sudo dnf install gcc-c++
-
-# Arch
-sudo pacman -S g++
-
-# For any other distributions look it up in google
-```
-
-Next we need to compile it. It's easy to do, just go to the folder end enter:
+To configure cmake and compile Debug build use:
 
 ```bash
-./compile-x86_64.sh
+# Make sure you are in a root folder of a project
+# Configure, you won't need to run this line more than once, unless
+# you change CMakeLists.txt
+cmake -DCMAKE_BUILD_TYPE:STRING=Debug
+
+# Compile
+cmake --build --config Debug --target all --
 ```
 
-And with that you get two files: `brainf` and `braind`.
-
-## This is it!
+And with that you get two files: `build/src/brainf` and `build/src/braind`.
 
 Now you can use brainf*ck interpreter and debugger!
+
+## Usage
+
+Use executable you compiled or downloaded and write:
+
+```bash
+# Interpreter
+brainf <filename>
+
+# Debugger
+braind <filename or nothing>
+```
+
+## Special thanks
+
+Thanks to random people of the internet that helped me come up with this
+idea!

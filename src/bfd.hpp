@@ -5,6 +5,7 @@ class Debugger {
 public:
     Debugger();
     Debugger(const char* path);
+    ~Debugger();
 
     Interpreter i;
 public:

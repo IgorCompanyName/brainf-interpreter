@@ -19,6 +19,7 @@ class Interpreter {
 public:
     Interpreter();
     Interpreter(const char* path);
+    ~Interpreter();
 
     int dataPointer;
     int data[MAX_SIZE];

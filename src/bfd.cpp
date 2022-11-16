@@ -4,6 +4,9 @@ Debugger::Debugger() {
     i = Interpreter();
     task = false;
 }
+Debugger::~Debugger() {
+    task = false;
+}
 Debugger::Debugger(const char* path) {
     i = Interpreter(path);
     task = true;

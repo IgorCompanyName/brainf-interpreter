@@ -131,6 +131,9 @@ void Interpreter::interpret() {
         step(c);
     }
 }
+Interpreter::~Interpreter() {
+    
+}
 void Interpreter::appendPath(const char* path) {
     f = fopen(path, "r");
 
